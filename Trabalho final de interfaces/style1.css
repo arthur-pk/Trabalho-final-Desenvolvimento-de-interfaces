@@ -1,0 +1,130 @@
+body{
+    background-image: url('imagens/pfinicio.png');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+    
+    background-attachment: fixed;
+
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    color: var(--texto);
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    height: auto;
+}
+
+:root {
+  --noite: #0d0a1f;
+  --painel: rgba(14, 10, 36, 0.84);
+  --campo: #1a1438;
+  --borda-campo: #4a3f7a;
+  --ouro: #ffb62e;
+  --ouro-claro: #ffd84a;
+  --marrom: #7a2e00;
+  --texto: #ffe9b0;
+  --erro: #ff6b5e;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.tela-inicial{
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 16px 9vh;
+}
+
+.painel{
+    width: min(340px, 100%);
+    padding: 22px 22px 24px;
+    background: var(--painel);
+    border: 3px solid var(--ouro);
+    box-shadow: 0 0 0 3px var(--noite), 0 0 32px rgba(255, 160, 50, 0.28);
+}
+
+.campo{
+    margin-bottom: 14px;
+}
+
+.campo label{
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    letter-spacing: 0.4em;
+}
+
+.campo input{
+    width: 100%;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 17px;
+    color: var(--texto);
+    background: var(--campo);
+    border: 2px solid var(--borda-campo);
+    border-radius: 0;
+}
+
+.campo input:focus{
+    outline: none;
+    border-color: var(--ouro);
+    box-shadow: 0 0 0 2px var(--ouro);
+}
+
+#btn-play{
+    width: 100%;
+    padding: 12px 0 11px;
+    font: inherit;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    color: #3a1200;
+    background: linear-gradient(var(--ouro-claro), var(--ouro));
+    border: 3px solid var(--marrom);
+    border-radius: 0;
+    box-shadow: 0 5px 0 var(--marrom);
+    cursor: pointer;
+}
+
+#btn-play:hover{
+    filter: brightness(1.08);
+}
+
+#btn-play:active{
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--marrom);
+}
+
+#btn-play:focus-visible{
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.tremer{
+    animation: tremer 0.35s;
+}
+
+@keyframes tremer{
+    0%, 100%{ transform: translateX(0); }
+    25%{ transform: translateX(-6px); }
+    75%{ transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .tremer{ animation: none; }
+}
