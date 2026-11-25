@@ -1,16 +1,76 @@
 <!DOCTYPE html>
-<html lang = "pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
-        <title> Final turn </title>
-    </head>
-    <body>
-            </form>
-        </main>
-        <script src="../formsinicial.js"></script>
-    </body>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Turn - Batalha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="jogo.css">
+</head>
+<body>
+  <div id="cena">
+
+    <!-- Barra de vida e elemento do boss -->
+    <div id="hud-boss">
+      <div class="linha-info">
+        <span id="boss-nome">Demonio Imortal</span>
+        <span id="boss-elemento"></span>
+      </div>
+      <div class="barra"><div id="boss-vida" class="preenchimento"></div></div>
+    </div>
+
+    <!-- Personagens (por enquanto são caixas de teste) -->
+    <div id="sprite-jogador" class="sprite"></div>
+    <div id="sprite-boss" class="sprite"></div>
+
+    <!-- Parte de baixo: mensagem + HUD do jogador + menu -->
+    <div id="painel-inferior">
+      <div id="mensagem" class="caixa"></div>
+
+      <div id="linha-inferior">
+        <div id="hud-jogador" class="caixa">
+          <div class="linha-info">
+            <span id="jogador-nome">Herói</span>
+            <span id="jogador-vida-texto"></span>
+          </div>
+          <div class="barra"><div id="jogador-vida" class="preenchimento"></div></div>
+
+          <div class="linha-info pequeno">
+            <span>Especial</span>
+            <span id="especial-texto"></span>
+          </div>
+          <div class="barra fina"><div id="especial-barra" class="preenchimento"></div></div>
+        </div>
+
+        <div id="menu" class="caixa">
+          <button id="btn-atacar" class="botao">⚔ Atacar</button>
+          <button id="btn-magia" class="botao">✨ Magia</button>
+          <button id="btn-inventario" class="botao">🎒 Inventário</button>
+          <button id="btn-especial" class="botao">💥 Especial</button>
+        </div>
+
+        <div id="submenu-magia" class="caixa submenu oculto">
+          <button class="botao" data-magia="fogo">🔥 Fogo</button>
+          <button class="botao" data-magia="agua">💧 Água</button>
+          <button class="botao" data-magia="terra">🪨 Terra</button>
+          <button class="botao" data-magia="raio">⚡ Relâmpago</button>
+        </div>
+
+        <div id="submenu-inventario" class="caixa submenu oculto">
+          <button id="btn-pocao" class="botao">🧪 Poção (<span id="qtd-pocoes">3</span>)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela de fim de jogo -->
+    <div id="fim" class="oculto">
+      <h2 id="fim-titulo"></h2>
+      <button id="btn-reiniciar" class="botao">Jogar de novo</button>
+    </div>
+
+  </div>
+  <script src="jogo.js"></script>
+</body>
+</html>

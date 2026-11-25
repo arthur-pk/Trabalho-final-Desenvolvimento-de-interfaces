@@ -1,0 +1,146 @@
+:root {
+  --noite: #0d0a1f;
+  --painel: rgba(14, 10, 36, 0.88);
+  --campo: #1a1438;
+  --borda-campo: #4a3f7a;
+  --ouro: #ffb62e;
+  --ouro-claro: #ffd84a;
+  --marrom: #7a2e00;
+  --texto: #ffe9b0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  color: var(--texto);
+  /* "../" sobe da pasta jogo/ até a pasta onde fica imagens/ */
+  background: var(--noite) url("../imagens/pfinicio.png") center / cover no-repeat;
+  image-rendering: pixelated;
+}
+
+#cena { position: relative; width: 100%; height: 100vh; }
+.oculto { display: none !important; }
+
+/* ---------- Personagens ---------- */
+/* CAIXAS DE TESTE: quando tiver os sprites, troque o "background"
+   por background-image: url("imagens/seu-sprite.png") */
+.sprite {
+  position: absolute;
+  bottom: 38%;
+  transition: transform 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+#sprite-jogador { left: 16%; width: 150px; height: 190px; background: #3a6ea5; border: 3px solid #fff; }
+#sprite-jogador::after { content: "HERÓI"; }
+#sprite-boss {
+  right: 16%; width: 240px; height: 280px;
+  background: #6b2a3a;
+  border: 3px solid var(--cor-elemento, #fff);
+  box-shadow: 0 0 30px var(--cor-elemento, transparent);
+  transition: transform 0.25s, box-shadow 0.4s, border-color 0.4s;
+}
+#sprite-boss::after { content: "BOSS"; }
+
+/* ---------- Animações ---------- */
+.avancar-direita { transform: translateX(80px); }
+.avancar-esquerda { transform: translateX(-80px); }
+.sofrer { animation: sofrer 0.4s; }
+.morto { opacity: 0.25; transition: opacity 1s; }
+
+@keyframes sofrer {
+  0%, 100% { transform: translateX(0); filter: none; }
+  25% { transform: translateX(-10px); filter: brightness(2.5); }
+  75% { transform: translateX(10px); filter: brightness(2.5); }
+}
+
+.numero-dano {
+  position: absolute;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  animation: subir 0.9s forwards;
+}
+.numero-dano.cura { color: #6dff7a; }
+
+@keyframes subir {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translate(-50%, -70px); }
+}
+
+/* ---------- HUD ---------- */
+.caixa {
+  background: var(--painel);
+  border: 3px solid var(--ouro);
+  box-shadow: 0 0 0 3px var(--noite);
+  padding: 12px 14px;
+}
+
+#hud-boss {
+  position: absolute;
+  top: 16px; left: 50%;
+  transform: translateX(-50%);
+  width: min(460px, 92%);
+}
+
+.linha-info { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 18px; }
+.linha-info.pequeno { margin-top: 10px; font-size: 14px; }
+
+.barra { height: 20px; background: var(--campo); border: 2px solid var(--borda-campo); }
+.barra.fina { height: 12px; }
+.preenchimento { height: 100%; width: 100%; transition: width 0.4s; }
+#boss-vida { background: #d9342b; }
+#jogador-vida { background: #4cc24a; }
+#especial-barra { background: var(--ouro); }
+
+#painel-inferior {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  background: linear-gradient(transparent, rgba(13, 10, 36, 0.9));
+}
+#mensagem { width: min(720px, 100%); min-height: 48px; text-align: center; font-size: 18px; }
+#linha-inferior { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 14px; width: 100%; }
+#hud-jogador { width: min(300px, 100%); }
+#menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: min(360px, 100%); }
+.submenu { display: grid; gap: 8px; }
+
+.botao {
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 17px;
+  color: #3a1200;
+  background: linear-gradient(var(--ouro-claro), var(--ouro));
+  border: 3px solid var(--marrom);
+  border-radius: 0;
+  box-shadow: 0 4px 0 var(--marrom);
+  cursor: pointer;
+}
+.botao:hover:not(:disabled) { filter: brightness(1.08); }
+.botao:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 var(--marrom); }
+.botao:disabled { filter: grayscale(1); opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Fim de jogo ---------- */
+#fim {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 24px;
+  background: rgba(0, 0, 0, 0.78);
+}
+#fim h2 { margin: 0; font-size: 64px; color: var(--ouro-claro); text-shadow: 4px 4px 0 var(--marrom); }
