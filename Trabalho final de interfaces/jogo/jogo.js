@@ -1,8 +1,3 @@
-/* =============================================================
-   1. DADOS DO JOGO
-   Aqui ficam os números. Quer o jogo mais fácil ou difícil?
-   É só mexer nesta parte.
-   ============================================================= */
 
 // "fraco" = a magia que causa dano DOBRADO num boss deste elemento
 const ELEMENTOS = {
@@ -12,12 +7,12 @@ const ELEMENTOS = {
   raio:  { nome: "Relâmpago", icone: "⚡", cor: "#ffd84a", fraco: "terra" },
 };
 
-const DANO_ESPADA = [13, 18];   // sorteia um valor entre os dois
+const DANO_ESPADA = [13, 18];   
 const DANO_MAGIA = 25;
 const DANO_ESPECIAL = 90;
 const CURA_POCAO = 40;
 const DANO_BOSS = [15, 22];
-const TURNOS_PARA_TROCAR = 3;   // o boss troca de elemento a cada 3 turnos dele
+const TURNOS_PARA_TROCAR = 2;   
 
 // Nome vem da tela de login (se não tiver, usa "Herói")
 const jogador = {
@@ -32,17 +27,17 @@ const boss = { nome: "Demonio Imortal", vida: 250, vidaMax: 250, elemento: "fogo
 let turnosBoss = 0;   // quantos turnos o boss já jogou
 let ocupado = false;  // true enquanto uma animação/turno acontece (trava os botões)
 
-/* =============================================================
+   /*
    2. PEGANDO OS ELEMENTOS DO HTML
-   ============================================================= */
+    */
 const cena = document.getElementById("cena");
 const spriteJogador = document.getElementById("sprite-jogador");
 const spriteBoss = document.getElementById("sprite-boss");
 const caixaMensagem = document.getElementById("mensagem");
 
-/* =============================================================
+   /* 
    3. FUNÇÕES AUXILIARES
-   ============================================================= */
+   */
 
 // Sorteia um número inteiro entre min e max
 function sortear([min, max]) {
@@ -78,10 +73,10 @@ function mostrarDano(alvo, valor, cura = false) {
   setTimeout(() => numero.remove(), 900);
 }
 
-/* =============================================================
+   /* 
    4. ATUALIZAR A TELA
    Chamada sempre que um número muda (vida, especial, etc.)
-   ============================================================= */
+  */
 function atualizarTela() {
   const el = ELEMENTOS[boss.elemento];
 
@@ -101,10 +96,10 @@ function atualizarTela() {
   document.getElementById("qtd-pocoes").textContent = jogador.pocoes;
 }
 
-/* =============================================================
+   /* 
    5. AÇÕES DO JOGADOR
    Cada ação devolve false se NÃO gastou o turno.
-   ============================================================= */
+   */
 
 async function danoNoBoss(valor, carregarEspecial = true) {
   boss.vida = Math.max(0, boss.vida - valor);
@@ -166,9 +161,9 @@ async function ataqueEspecial() {
   await danoNoBoss(DANO_ESPECIAL, false); // o especial não carrega o próprio especial
 }
 
-/* =============================================================
+   /* 
    6. TURNO DO BOSS
-   ============================================================= */
+   */
 function trocarElemento() {
   const outros = Object.keys(ELEMENTOS).filter((e) => e !== boss.elemento);
   boss.elemento = outros[Math.floor(Math.random() * outros.length)];
@@ -195,11 +190,11 @@ async function turnoDoBoss() {
   }
 }
 
-/* =============================================================
+   /* 
    7. CONTROLE DOS TURNOS
    Toda ação do jogador passa por aqui:
    jogador age -> confere vitória -> boss age -> confere derrota
-   ============================================================= */
+   */
 async function jogar(acao) {
   if (ocupado) return;
   ocupado = true;
@@ -228,9 +223,9 @@ function fimDeJogo(venceu) {
   setTimeout(() => document.getElementById("fim").classList.remove("oculto"), 1000);
 }
 
-/* =============================================================
+   /*
    8. BOTÕES E MENUS
-   ============================================================= */
+   */
 function fecharSubmenus() {
   document.getElementById("submenu-magia").classList.add("oculto");
   document.getElementById("submenu-inventario").classList.add("oculto");
@@ -256,8 +251,8 @@ document.querySelectorAll("[data-magia]").forEach((botao) => {
   botao.addEventListener("click", () => jogar(() => usarMagia(botao.dataset.magia)));
 });
 
-/* =============================================================
+   /*
    9. COMEÇO DO JOGO
-   ============================================================= */
+   */
 atualizarTela();
 mensagem(`Um ${boss.nome} bloqueia o caminho! Escolha uma ação.`);
