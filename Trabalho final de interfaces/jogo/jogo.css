@@ -17,7 +17,7 @@ body {
   overflow: hidden;
   font-family: "Pixelify Sans", "Courier New", monospace;
   color: var(--texto);
-  /* "../" sobe da pasta jogo/ até a pasta onde fica imagens/ */
+  
   background: var(--noite) url("../imagens/pfinicio.png") center / cover no-repeat;
   image-rendering: pixelated;
 }
@@ -26,8 +26,7 @@ body {
 .oculto { display: none !important; }
 
 /* ---------- Personagens ---------- */
-/* CAIXAS DE TESTE: quando tiver os sprites, troque o "background"
-   por background-image: url("imagens/seu-sprite.png") */
+
 .sprite {
   position: absolute;
   bottom: 38%;
